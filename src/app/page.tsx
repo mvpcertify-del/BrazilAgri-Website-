@@ -63,32 +63,39 @@ export default function HomePage() {
           sizes="100vw"
           className="object-cover object-center"
         />
-        {/* Left-weighted scrim keeps copy legible while the ship stays clearly visible on the right */}
+        {/* Left scrim for legibility; the ship stays visible on the right */}
         <div
-          className="absolute inset-0 bg-gradient-to-r from-navy-950/95 from-5% via-navy-900/55 via-45% to-transparent to-85%"
+          className="absolute inset-0 bg-gradient-to-r from-navy-950/95 from-0% via-navy-950/72 via-42% to-navy-900/15 to-92%"
           aria-hidden="true"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-navy-950/65 via-transparent to-transparent"
+          className="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/5 to-navy-950/45"
           aria-hidden="true"
         />
-        <Container className="relative w-full py-12 sm:py-14 lg:py-16">
-          <div className="animate-fade-up max-w-xl md:max-w-2xl">
-            <p className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.18em] text-gold-400 uppercase sm:text-[12px] sm:tracking-[0.2em]">
-              <span className="h-px w-6 bg-gold-400/70" aria-hidden="true" />
-              {hero.eyebrow}
-            </p>
-            <h1 className="font-display mt-4 text-2xl font-extrabold leading-[1.15] tracking-tight text-white sm:text-3xl lg:text-4xl">
-              {hero.titleLines.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
+
+        <Container className="relative w-full py-20 sm:py-24">
+          <div className="animate-fade-up max-w-2xl lg:max-w-3xl">
+            {/* Eyebrow badge with a live dot */}
+            <span className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.07] px-4 py-1.5 backdrop-blur-sm">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-brazil-green-500 opacity-70 animate-pulse-dot" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brazil-green-500" />
+              </span>
+              <span className="text-[10px] font-bold tracking-[0.2em] text-gold-400 uppercase sm:text-[11px]">
+                {hero.eyebrow}
+              </span>
+            </span>
+
+            <h1 className="font-display mt-6 text-4xl font-extrabold leading-[1.04] tracking-tight text-white sm:text-5xl lg:text-6xl">
+              <span className="block">{hero.titleLines[0]}</span>
+              <span className="mt-1 block text-gold-400">{hero.titleLines[1]}</span>
             </h1>
-            <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/70 sm:text-[15px]">
+
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
               {hero.lead}
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
               <Button href={hero.primaryCta.href} variant="gold" className="w-full justify-center sm:w-auto">
                 {hero.primaryCta.label}
               </Button>
@@ -97,10 +104,25 @@ export default function HomePage() {
               </Button>
             </div>
 
+            {/* Credibility line */}
+            <ul className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3 border-t border-white/10 pt-6">
+              {["Trusted Since 1975", "SIF / MAPA Verified Plants", "SGS / Bureau Veritas Inspection"].map(
+                (item) => (
+                  <li
+                    key={item}
+                    className="flex items-center gap-2 text-[12px] font-semibold tracking-wide text-white/75 sm:text-[13px]"
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full bg-gold-400" aria-hidden="true" />
+                    {item}
+                  </li>
+                )
+              )}
+            </ul>
+
             {/* Compact "Watch Our Story" for small screens */}
             <Link
               href="/about"
-              className="mt-6 inline-flex items-center gap-3 text-white/90 transition hover:text-gold-400 lg:hidden"
+              className="mt-8 inline-flex items-center gap-3 text-white/90 transition hover:text-gold-400 lg:hidden"
             >
               <span className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-white/70">
                 <svg viewBox="0 0 24 24" className="ml-0.5 h-4 w-4 fill-current" aria-hidden="true">
@@ -131,6 +153,16 @@ export default function HomePage() {
             Watch Our Story
           </span>
         </Link>
+        {/* Scroll cue */}
+        <div
+          className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-white/50 lg:flex"
+          aria-hidden="true"
+        >
+          <span className="text-[9px] font-bold tracking-[0.3em] uppercase">Scroll</span>
+          <span className="flex h-8 w-5 items-start justify-center rounded-full border border-white/30 p-1">
+            <span className="h-1.5 w-1 rounded-full bg-white/70 animate-pulse-dot" />
+          </span>
+        </div>
         <div
           className="brazil-ribbon absolute inset-x-0 bottom-0 h-1.5"
           aria-hidden="true"
