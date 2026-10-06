@@ -54,7 +54,7 @@ export default function HomePage() {
   return (
     <>
       {/* 1) HERO ----------------------------------------------------- */}
-      <section className="relative flex min-h-[48vh] items-center overflow-hidden bg-navy-900 sm:min-h-[58vh] lg:min-h-[62vh]">
+      <section className="relative flex min-h-[100svh] items-center overflow-hidden bg-navy-900 lg:min-h-screen">
         <Image
           src={hero.image}
           alt="Containerized agricultural cargo at a Brazilian export terminal"
