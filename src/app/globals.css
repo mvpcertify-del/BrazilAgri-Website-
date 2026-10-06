@@ -1,0 +1,207 @@
+@import "tailwindcss";
+
+@theme {
+  /* --- Corporate identity (ABCO lineage) --- */
+  --color-navy-950: #04101f;
+  --color-navy-900: #071a31;
+  --color-navy-800: #0b2545; /* Deep Corporate Navy — primary */
+  --color-navy-700: #0f2d52;
+  --color-navy-600: #134074; /* Steel Maritime Blue — freight & shipping */
+  --color-navy-500: #1b4e86;
+  --color-navy-100: #d6e0ee;
+  --color-navy-50: #eef3f9;
+
+  /* --- Amber gold (agricultural fields & sugar) --- */
+  --color-gold-700: #9a7905;
+  --color-gold-600: #c29a06;
+  --color-gold-500: #eeb902; /* Warm accent */
+  --color-gold-400: #f3c836;
+  --color-gold-300: #f7d867;
+  --color-gold-100: #fbecb4;
+
+  /* --- Brazilian flag accents --- */
+  --color-brazil-green-800: #00541f;
+  --color-brazil-green-700: #00702a;
+  --color-brazil-green-600: #009739; /* Flag green — "AGRI" */
+  --color-brazil-green-500: #00a443;
+  --color-brazil-green-300: #52c47f;
+  --color-brazil-green-100: #d6f0e0;
+  --color-brazil-blue-900: #001239;
+  --color-brazil-blue-800: #001b54;
+  --color-brazil-blue-700: #002776; /* Flag globe blue — "BRAZIL" */
+  --color-brazil-yellow-500: #ffdf00; /* Flag yellow */
+
+  /* --- Market ticker semantics --- */
+  --color-ticker-up: #16c073;
+  --color-ticker-down: #ff5a5a;
+
+  /* --- Typography (blueprint: Montserrat headers / Open Sans body) --- */
+  --font-sans: var(--font-open-sans), "Open Sans", system-ui, -apple-system,
+    "Segoe UI", Roboto, Arial, sans-serif;
+  --font-display: var(--font-montserrat), "Montserrat", var(--font-open-sans),
+    system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+:root {
+  --bg: #ffffff;
+  --fg: #0f1b2d;
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Guard against any stray full-bleed element forcing a horizontal scrollbar.
+     Applied to <html> so the sticky header keeps referencing the viewport. */
+  overflow-x: hidden;
+}
+
+body {
+  max-width: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Thin gold rule under a section heading */
+.rule-gold::after {
+  content: "";
+  display: block;
+  width: 3.25rem;
+  height: 3px;
+  margin-top: 0.85rem;
+  background: var(--color-gold-500);
+}
+
+.rule-gold-center::after {
+  content: "";
+  display: block;
+  width: 3.25rem;
+  height: 3px;
+  margin: 0.85rem auto 0;
+  background: var(--color-gold-500);
+}
+
+/* Dotted texture used inside dark panels */
+.dot-grid {
+  background-image: radial-gradient(currentColor 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+/* Brazilian-flag ribbon accent (green→yellow→green) */
+.brazil-ribbon {
+  background: linear-gradient(
+    90deg,
+    var(--color-brazil-green-600) 0%,
+    var(--color-brazil-green-600) 33%,
+    var(--color-brazil-yellow-500) 50%,
+    var(--color-brazil-green-600) 67%,
+    var(--color-brazil-green-600) 100%
+  );
+}
+
+/* --- Market ticker marquee --- */
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  animation: ticker-scroll 60s linear infinite;
+}
+
+.ticker-track:hover .animate-ticker {
+  animation-play-state: paused;
+}
+
+/* --- General motion --- */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float-y 7s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 48s linear infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out both;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker,
+  .animate-marquee,
+  .animate-float,
+  .animate-spin-slow,
+  .animate-fade-up,
+  .animate-pulse-dot {
+    animation: none;
+  }
+  .animate-fade-up {
+    opacity: 1;
+    transform: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
